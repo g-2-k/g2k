@@ -94,6 +94,7 @@ void Compress(std::ifstream& inFile, std::ofstream& outFile)
 	build(inData, outFile);
 
 	writeData(0, 7, outFile);
+	outFile.flush();
 	outFile.close();
 
 }
