@@ -1,7 +1,7 @@
 # include "G2K.h"
 
 unsigned int dataSize;
-unsigned int sze;
+unsigned int max_z;
 
 struct ddl *adl = new ddl[1024];
 char * inFile;
@@ -16,49 +16,49 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	Init(FILE_IN, FILE_OP);
 }
 
-void Init(LPWSTR inf, LPWSTR ouf) {
-	std::ifstream inn(inf, std::ios::binary);
-	std::ofstream out;
-	if(!inn)
+void Init(LPWSTR inFilePath, LPWSTR outFilePath) {
+	std::ifstream inFile(inFilePath, std::ios::binary);
+	std::ofstream outFile;
+	if(!inFile)
 		exit(ERROR_INPUT_FILE);
 	else {
-		out.open(ouf, std::ios::binary);
-		if(!out)
+		outFile.open(outFilePath, std::ios::binary);
+		if(!outFile)
 			exit(ERROR_OUTPUT_FILE);
 		else {
-			Compress(inn, out);
+			Compress(inFile, outFile);
 		}
 	}
 }
 
-void Compress(std::ifstream& inn, std::ofstream& out)
+void Compress(std::ifstream& inFile, std::ofstream& outFile)
 {
 
-	out.write(G2K_FILE_HEADER, 4);
+	outFile.write(G2K_FILE_HEADER, 4);
 //	flenme(arg);
 
 	{
-	inn.seekg(0, std::ios::end);
-	dataSize = (UINT)inn.tellg();
-	sze = dataSize/16;
-	inn.seekg(0, std::ios::beg);
+	inFile.seekg(0, std::ios::end);
+	dataSize = (UINT)inFile.tellg();
+	max_z = dataSize/16;
+	inFile.seekg(0, std::ios::beg);
 	}
 
-	LPBYTE fle;
-	fle = new BYTE[dataSize];
-	if(!fle)
+	LPBYTE inData;
+	inData = new BYTE[dataSize];
+	if(!inData)
 		exit(-4);
-	inn.read((char *) fle, dataSize);
+	inFile.read((char *) inData, dataSize);
 	//inn.close();
 
 	{
-	unsigned int crc = getcrc(fle, dataSize);
-	out.write((char *) &crc, sizeof crc);
+	unsigned int crc = getcrc(inData, dataSize);
+	outFile.write((char *) &crc, sizeof crc);
 	}
 
-	out.write((char *) &dataSize, sizeof dataSize);
+	outFile.write((char *) &dataSize, sizeof dataSize);
 
-	buildLine(fle, out);
+	buildLines(inData, outFile);
 
 	unsigned int nNode = buildFrequency();
 	code = new CodeNode[nNode];
@@ -71,24 +71,26 @@ void Compress(std::ifstream& inn, std::ofstream& out)
 	buildCode(nNode);
 	buildX();
 
-	fle = new unsigned char[dataSize];
-	if(!fle)
+	inData = new unsigned char[dataSize];
+	if(!inData)
 		exit(-4);
-	inn.seekg(0, std::ios::beg);
-	inn.read((char *) fle, dataSize);
-	inn.close();
+	inFile.seekg(0, std::ios::beg);
+	inFile.read((char *) inData, dataSize);
+	inFile.close();
 
-	build(fle, out);
+	build(inData, outFile);
 
-	writeData(0, 7, out);
-	out.close();
+	writeData(0, 7, outFile);
+	outFile.close();
 
 }
+#define MAX_Y 16
+#define MAX_X 8
 
-void buildLine(LPBYTE fle, std::ofstream& out) {
-	for(unsigned int z = 0; z <= sze; z++)
-		for(unsigned int y = 0; y < 16; y++)
-			for(unsigned int x = 0; x < 8; x++)
+void buildLines(LPBYTE fle, std::ofstream& out) {
+	for(unsigned int z = 0; z <= max_z; z++)
+		for(unsigned int y = 0; y < MAX_Y; y++)
+			for(unsigned int x = 0; x < MAX_X; x++)
 				if(pointValue(fle, x, y, z))
 					findLine(fle, x, y, z, true, out);
 	delete fle;
@@ -210,9 +212,9 @@ void buildX()
 
 void build(LPBYTE fle, std::ofstream& out)
 {
-	for(unsigned int z = 0; z <= sze; z++)
-		for(unsigned int y = 0; y < 16; y++, writeData(1, 1, out))
-			for(unsigned int x = 0; x < 8; x++)
+	for(unsigned int z = 0; z <= max_z; z++)
+		for(unsigned int y = 0; y < MAX_Y; y++, writeData(1, 1, out))
+			for(unsigned int x = 0; x < MAX_X; x++)
 				if(pointValue(fle, x, y, z)) {
 					writeData(0, 1, out);
 					writeData(x, 3, out);

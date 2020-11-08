@@ -35,7 +35,7 @@ inline void wrtdat(unsigned int, signed int);
 inline void findLine(unsigned char *, unsigned int, unsigned int, unsigned int, bool);
 void Init(LPWSTR inf, LPWSTR ouf);
 void Compress(std::ifstream& inn, std::ofstream& out);
-void buildLine(LPBYTE fle, std::ofstream& out);
+void buildLines(LPBYTE fle, std::ofstream& out);
 unsigned int buildFrequency();
 void buildCode(unsigned int non);
 void buildX();

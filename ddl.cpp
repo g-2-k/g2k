@@ -36,7 +36,7 @@ ddl::ddl()
 	ctr++;
 };
 
-void ddl::hdldtl(unsigned int tdl)
+void ddl::handleDetail(unsigned int tdl)
 {
 	mem sdl(sdt);
 	bool flg = true;
@@ -55,8 +55,12 @@ void ddl::hdldtl(unsigned int tdl)
 	}
 };
 
-unsigned int ddl::searchdtl(unsigned int tdl)
+unsigned int ddl::searchDetail(unsigned int tdl)
 {
+	for(unsigned int q = 0; q < num; q++)
+		if(dtl[q] == tdl)
+			return q;
+	exit(0xBAD);
 	for(unsigned int lwr = 0, upr = num;;)
 	{
 		unsigned int i = (upr+lwr)/2;

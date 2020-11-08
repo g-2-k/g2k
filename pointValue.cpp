@@ -6,11 +6,11 @@ bool pointValue(unsigned char *buf, unsigned int x, unsigned int y, unsigned int
 		return false;
 	else if(y > 15)
 		return false;
-	else if(z > sze)
+	else if(z > max_z)
 		return false;
 
-	if(z == sze)
-		if(y >= (dataSize-sze*16))
+	if(z == max_z)
+		if(y >= (dataSize-max_z*16))
 			return false;
 
 	buf += (z*16+y);

@@ -16,8 +16,8 @@ struct ddl
 	unsigned int *frequency;
 
 	ddl();
-	void hdldtl(unsigned int);
-	unsigned int searchdtl(unsigned int);
+	void handleDetail(unsigned int);
+	unsigned int searchDetail(unsigned int);
 };
 
 # endif

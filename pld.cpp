@@ -6,7 +6,7 @@ pld::pld()
 	tdl = 0;
 };
 
-void pld::hdllne(unsigned int length, unsigned int nBit)
+void pld::handleLine(unsigned int length, unsigned int nBit)
 {
 	if(length) {
 		tdr = (tdr << 1) | 0x1;
