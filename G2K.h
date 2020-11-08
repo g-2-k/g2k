@@ -20,9 +20,6 @@
 # include "dat.h"
 # include "FindLine.h"
 
-# define FILE_IN			L"MOC.bmp"
-# define FILE_OP			L"MOC.g2k"
-
 # define ERROR_INPUT_FILE	-2
 # define ERROR_OUTPUT_FILE	-3
 

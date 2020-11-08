@@ -1,5 +1,10 @@
 # include "G2K.h"
 
+# define MIN_ARGS					2
+# define MAX_ARGS					2
+
+# define MAX_PATH_LEN			256
+
 unsigned int dataSize;
 unsigned int max_z;
 
@@ -13,7 +18,15 @@ CodeNode *code;
 NextNode *next;
 
 INT WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPTSTR lpCmdLine, _In_ INT nCmdShow) {
-	Init(FILE_IN, FILE_OP);
+	INT nArgs;
+	LPWSTR* szArgs;
+	szArgs = CommandLineToArgvW(lpCmdLine, &nArgs);
+	if (nArgs < MIN_ARGS)
+		exit(-0xA1);
+	else if (nArgs > MAX_ARGS)
+		exit(-0xA2);
+
+	Init(szArgs[0], szArgs[1]);
 }
 
 void Init(LPWSTR inFilePath, LPWSTR outFilePath) {
