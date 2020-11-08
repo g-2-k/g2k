@@ -14,8 +14,8 @@ void findLine(unsigned char *fle, unsigned int x, unsigned int y, unsigned int z
 	for (length = 0; pointValue(fle, x, y+length+1, z); length++);
 	tld.hdllne(length, 4);
 
-	for (length = 0; pointValue(fle, x, y, z+length+1) && length < 4; length++);
 	tld.hdllne(length, 2);
+	for (length = 0; pointValue(fle, x, y, z+length+1) && length+1 < 4; length++);
 
 	for (length = 0; pointValue(fle, x-length+1, y+length+1, z); length++);
 	tld.hdllne(length, 3);
