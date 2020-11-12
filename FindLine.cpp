@@ -19,19 +19,19 @@ void findLine(unsigned char *fle, unsigned int x, unsigned int y, unsigned int z
 	for (length = 0; pointValue(fle, x, y, z+length+1) && length+1 < 4; length++);
 	tld.handleLine(length, 2);
 
-	for (length = 0; pointValue(fle, x-length+1, y+length+1, z); length++);
+	for (length = 0; pointValue(fle, x-length+1, y+length+1, z) && length + 1 < 8; length++);
 	tld.handleLine(length, 3);
 
 	for (length = 0; pointValue(fle, x+length+1, y+length+1, z); length++);
 	tld.handleLine(length, 3);
 
-	for (length = 0; pointValue(fle, x-(length+1), y, z+length+1); length++);
+	for (length = 0; pointValue(fle, x-(length+1), y, z+length+1) && length + 1 < 8; length++);
 	tld.handleLine(length, 3);
 
 	for (length = 0; pointValue(fle, x+length+1, y, z+length+1); length++);
 	tld.handleLine(length, 3);
 
-	for (length = 0; pointValue(fle, x, y-(length+1), z+length+1); length++);
+	for (length = 0; pointValue(fle, x, y-(length+1), z+length+1) && length + 1 < 16; length++);
 	tld.handleLine(length, 4);
 
 	for (length = 0; pointValue(fle, x, y+length+1, z+length+1); length++);
