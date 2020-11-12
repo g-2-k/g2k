@@ -14,13 +14,15 @@ struct FrequencyNode
 	FrequencyNode operator + (FrequencyNode&);
 };
 
-struct WhereNode {
+struct WhereNode
+{
 	unsigned int where;
 	static unsigned int counter;
 	WhereNode();
 };
 
-struct CodeNode {
+struct CodeNode
+{
 	unsigned int code;
 	unsigned char bitLength;
 	static unsigned char maxLength;
@@ -29,7 +31,8 @@ struct CodeNode {
 	void nomCode();
 };
 
-struct NextNode {
+struct NextNode
+{
 	unsigned int next;
 	NextNode();
 	void operator = (WhereNode&);

@@ -7,8 +7,8 @@
 # include "G2K.h"
 
 extern inline bool bolval(unsigned char*, unsigned int, unsigned int, unsigned int);
-extern struct ddl *adl;
+extern struct ddl* adl;
 
-void findLine(unsigned char *fle, unsigned int x, unsigned int y, unsigned int z, bool one, std::ofstream& out);
+void findLine(unsigned char* fle, unsigned int x, unsigned int y, unsigned int z, bool one, std::ofstream& out);
 
 # endif

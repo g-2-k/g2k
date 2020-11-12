@@ -25,11 +25,11 @@
 
 # define G2K_FILE_HEADER	"G2Kn"
 
-inline void flenme(char *[]);
-inline unsigned int getcrc(unsigned char *, unsigned int);
-inline bool pointValue(unsigned char *, unsigned int, unsigned int, unsigned int);
+inline void flenme(char* []);
+inline unsigned int getcrc(unsigned char*, unsigned int);
+inline bool pointValue(unsigned char*, unsigned int, unsigned int, unsigned int);
 inline void wrtdat(unsigned int, signed int);
-inline void findLine(unsigned char *, unsigned int, unsigned int, unsigned int, bool);
+inline void findLine(unsigned char*, unsigned int, unsigned int, unsigned int, bool);
 void Init(LPWSTR inf, LPWSTR ouf);
 void Compress(std::ifstream& inn, std::ofstream& out);
 void buildLines(LPBYTE fle, std::ofstream& out);

@@ -11,9 +11,9 @@ struct ddl
 {
 	unsigned int num;
 	unsigned int length;
-	unsigned char *sdt;
-	unsigned int *dtl;
-	unsigned int *frequency;
+	unsigned char* sdt;
+	unsigned int* dtl;
+	unsigned int* frequency;
 
 	ddl();
 	void handleDetail(unsigned int);

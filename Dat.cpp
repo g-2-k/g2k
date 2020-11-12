@@ -48,14 +48,14 @@ CodeNode::CodeNode() {
 void CodeNode::setCode(bool bol) {
 	code >>= 1;
 	bitLength++;
-	if(bitLength > maxLength)
+	if (bitLength > maxLength)
 		maxLength = bitLength;
-	if(bol)
+	if (bol)
 		code |= 0x80000000;
 };
 
 void CodeNode::nomCode() {
-	code >>= (32-bitLength);
+	code >>= (32 - bitLength);
 };
 
 
