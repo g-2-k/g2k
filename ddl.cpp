@@ -49,7 +49,9 @@ void ddl::handleDetail(unsigned int tdl)
 		}
 	}
 	if(flg) {
+		sdl.read_flush();
 		sdl.write(tdl, length);
+		sdl.write_flush();
 		frequency[num]++;
 		num++;
 	}
